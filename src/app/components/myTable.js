@@ -34,7 +34,7 @@ export class Mytable extends React.Component {
             
             <div className="container">
                 <h4>Hi</h4>
-                <h4>Below are the List of Users</h4>
+                <h4>Below are the List of Registered Users</h4>
                 <ul>
                     {this.state.user.map(user => (
                     <li >

@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Login from './login';
+
 export class Dashboard extends React.Component {
     constructor() {
         super();
@@ -19,16 +20,26 @@ export class Dashboard extends React.Component {
         }) 
     }
     
-     componentWillUnmount(){
-        localStorage.clear();
-         console.log('logged out');
-     }   
+    componentWillUnmount(){
+    localStorage.clear();
+        console.log('logged out');
+    }   
+
     render() {
         console.log(this.props);
         
         return (
             <div className="container">
-                <h4>Hi, welcome {this.props.location.state.userData.name.toUpperCase()}</h4>
+                {
+                    function(){
+                        if(this.props.location.state){
+                            return <h4>Hi, welcome {this.props.location.state.userData.name.toUpperCase()}</h4>;
+                        }
+                        else{
+                            return <h4>Welcome</h4>;
+                        }
+                    }.bind(this)()
+                }
                 <h4>This is your Dashboard</h4>
                 <br/>
                 <br/>

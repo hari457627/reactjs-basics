@@ -11,6 +11,7 @@ import { Time } from './components/time';
 import { Dashboard } from './components/dashboard';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
+
 class App extends Component {
     render() {
         return (
@@ -23,9 +24,9 @@ class App extends Component {
                                 <li><Link to={'/user'} activeStyle={{color:"red"}}>User</Link></li>
                                 <li><Link to={'/Register'} activeStyle={{color:"red"}}>Register</Link></li>
                                 <li><Link to={'/Login'} activeStyle={{color:"red"}}>Login</Link></li>
-                                <li><Link to={'/Table'} activeStyle={{color:"red"}}>Table</Link></li>
-                                <li><Link to={'/Mytable'} activeStyle={{color:"red"}}>Api Table</Link></li>
+                                <li><Link to={'/Mytable'} activeStyle={{color:"red"}}>Users</Link></li>
                                 <li><Link to={'/Time'} activeStyle={{color:"red"}}>Time</Link></li>
+                                
                             </ul>
                         </div>
                     </div>  
@@ -37,6 +38,7 @@ class App extends Component {
                     <Route path={"/Mytable"} component={Mytable}></Route>
                     <Route path={"/Time"} component={Time}></Route>
                     <Route path={"/Dashboard"} component={Dashboard}></Route>
+                    
                 </div>
             </Router>   
         );
