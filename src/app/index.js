@@ -10,10 +10,32 @@ import { Mytable } from './components/myTable';
 import { Time } from './components/time';
 import { Dashboard } from './components/dashboard';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-
+import { Redirect } from 'react-router';
 
 class App extends Component {
-    render() {
+    constructor() {
+        super();
+        this.state = {
+            isLogin: false
+        }
+    }
+    modifyLoginFlag = (flag=true)=>{
+        this.setState({isLogin: flag});
+    }
+    componentWillMount(){
+       if(localStorage.getItem('data')){
+        let name = localStorage.getItem('data').name;
+        this.setState({isLogin:true});
+       }
+    }
+
+    handleSubmit = () => {
+        this.setState({ isLogin: false });  
+        localStorage.clear();
+        console.log('logged out');
+    }
+
+    render() { 
         return (
             <Router>
                 <div className="container-fluid">
@@ -21,24 +43,24 @@ class App extends Component {
                     <div className="navbar navbar-default">
                         <div className="navbar navbar-header">
                             <ul className="nav navbar-nav">
-                                <li><Link to={'/user'} activeStyle={{color:"red"}}>User</Link></li>
-                                <li><Link to={'/Register'} activeStyle={{color:"red"}}>Register</Link></li>
-                                <li><Link to={'/Login'} activeStyle={{color:"red"}}>Login</Link></li>
-                                <li><Link to={'/Mytable'} activeStyle={{color:"red"}}>Users</Link></li>
-                                <li><Link to={'/Time'} activeStyle={{color:"red"}}>Time</Link></li>
-                                
+                                <li><Link to={'/user'} >User</Link></li>
+                                <li>{this.state.isLogin?<Link to={'/logout'} onClick={this.handleSubmit}>Logout</Link>:<Link to={'/login'} activeStyle={{color:"red"}}>Login</Link>}</li>
+                                <li><Link to={'/Mytable'} >Users</Link></li>
+                                <li><Link to={'/Time'} >Time</Link></li>
+                                <li>{this.state.isLogin?"":<Link to={'/Register'}>Register</Link>}</li>
                             </ul>
                         </div>
                     </div>  
                     <Route path={"/user"} component={User}></Route>
                     <Route path={"/success"} component={Success}></Route>
                     <Route path={"/register"} component={Register}></Route>
-                    <Route path={"/login"} component={Login}></Route>
+                    <Route path={"/login"} render={(props) => <Login modifyLoginFlag={this.modifyLoginFlag} {...props} /> }></Route>
+                    <Route path={"/logout"} render={(props) => <Login modifyLoginFlag={this.modifyLoginFlag} {...props} /> }></Route>
                     <Route path={"/table"} component={Table}></Route>
                     <Route path={"/Mytable"} component={Mytable}></Route>
                     <Route path={"/Time"} component={Time}></Route>
-                    <Route path={"/Dashboard"} component={Dashboard}></Route>
-                    
+                    <Route path={"/Dashboard"} render={(props) => <Dashboard modifyLoginFlag={this.modifyLoginFlag} {...props} /> }></Route>
+                    {this.state.isLogin ? <Redirect   to="Dashboard" />:''}
                 </div>
             </Router>   
         );

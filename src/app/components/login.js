@@ -34,6 +34,8 @@ export class Login extends React.Component {
     responseGoogleSuccess = (response) => {
         console.log(response.w3.ig);  
         console.log('success'); 
+        console.log(this.props);
+        this.props.modifyLoginFlag();
         localStorage.setItem("data",JSON.stringify(response));
         console.log(localStorage);
         this.props.history.push({
@@ -45,10 +47,14 @@ export class Login extends React.Component {
     responseGoogleFail = (response) => {
         console.log('Sign-in Failed');
         console.log(response);
+        this.props.history.push({
+            pathname: '/Login'
+        })
     }
     
     responseFacebook = (response) => {
         console.log(response);
+        this.props.modifyLoginFlag();
         localStorage.setItem("data",JSON.stringify(response));
         console.log(localStorage);
         this.props.history.push({
@@ -92,7 +98,7 @@ export class Login extends React.Component {
                     console.log(localStorage);
                     this.props.history.push({
                         pathname: '/Dashboard',
-                        state: { userData: response }
+                        state: { userData: response}
                     })
                 }
             })
@@ -132,7 +138,7 @@ export class Login extends React.Component {
                 <br/><br/>
                 <FacebookLogin
                 appId="294238751125031"
-                autoLoad={true}
+                autoLoad={false}
                 fields="name,email,picture"
                 callback={this.responseFacebook} 
                 className="btn btn-md " />
