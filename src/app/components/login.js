@@ -94,6 +94,7 @@ export class Login extends React.Component {
                 }
 
                 else if (response.id) {
+                    this.props.modifyLoginFlag();
                     localStorage.setItem("data",JSON.stringify(response));
                     console.log(localStorage);
                     this.props.history.push({
