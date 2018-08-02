@@ -11,7 +11,7 @@ export class Dashboard extends React.Component {
     }
 
     componentWillMount(){
-        console.log(localStorage.getItem("data"));
+        //console.log(localStorage.getItem("data"));
     }
 
     handleSubmit = () => {
@@ -21,11 +21,11 @@ export class Dashboard extends React.Component {
             pathname: '/login'
         }) 
         localStorage.clear();
-        console.log('logged out');    
+        //console.log('logged out');    
     }
     
     render() {
-        console.log(this.props);
+        //console.log(this.props);
         return (
             <div className="container">
                 {

@@ -11,6 +11,7 @@ import { Time } from './components/time';
 import { Dashboard } from './components/dashboard';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import { Redirect } from 'react-router';
+import { Redux } from './components/redux';
 
 class App extends Component {
     constructor() {
@@ -48,6 +49,7 @@ class App extends Component {
                                 <li><Link to={'/Mytable'} >Users</Link></li>
                                 <li><Link to={'/Time'} >Time</Link></li>
                                 <li>{this.state.isLogin?"":<Link to={'/Register'}>Register</Link>}</li>
+                                <li><Link to={'/Redux'}>Redux</Link></li>
                             </ul>
                         </div>
                     </div>  
@@ -59,6 +61,7 @@ class App extends Component {
                     <Route path={"/table"} component={Table}></Route>
                     <Route path={"/Mytable"} component={Mytable}></Route>
                     <Route path={"/Time"} component={Time}></Route>
+                    <Route path={"/Redux"} component={Redux}></Route>
                     <Route path={"/Dashboard"} render={(props) => <Dashboard modifyLoginFlag={this.modifyLoginFlag} {...props} /> }></Route>
                     {this.state.isLogin ? <Redirect   to="Dashboard" />:''}
                 </div>

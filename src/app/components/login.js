@@ -10,7 +10,7 @@ import { GoogleLogin } from 'react-google-login';
 
 import  FacebookLogin  from 'react-facebook-login';
 
-console.log("Facebook object:",FacebookLogin)
+//console.log("Facebook object:",FacebookLogin)
 
 export class Login extends React.Component {
     constructor(props) {
@@ -32,12 +32,12 @@ export class Login extends React.Component {
     }
 
     responseGoogleSuccess = (response) => {
-        console.log(response.w3.ig);  
-        console.log('success'); 
-        console.log(this.props);
+        //console.log(response.w3.ig);  
+        //console.log('success'); 
+        //console.log(this.props);
         this.props.modifyLoginFlag();
         localStorage.setItem("data",JSON.stringify(response));
-        console.log(localStorage);
+        //console.log(localStorage);
         this.props.history.push({
             pathname: '/Dashboard',
             state: { userData: {name : response.w3.ig} }
@@ -45,18 +45,18 @@ export class Login extends React.Component {
     }
 
     responseGoogleFail = (response) => {
-        console.log('Sign-in Failed');
-        console.log(response);
+        //console.log('Sign-in Failed');
+        //console.log(response);
         this.props.history.push({
             pathname: '/Login'
         })
     }
     
     responseFacebook = (response) => {
-        console.log(response);
+        //console.log(response);
         this.props.modifyLoginFlag();
         localStorage.setItem("data",JSON.stringify(response));
-        console.log(localStorage);
+        //console.log(localStorage);
         this.props.history.push({
             pathname: '/Dashboard',
             state: { userData: {name : response.name} }
@@ -73,7 +73,7 @@ export class Login extends React.Component {
         var data = {};
         data.email = email;
         data.phone = phone;
-        console.log(data);
+        //console.log(data);
 
         fetch("http://10.9.9.108:2001/login", {
             method: "POST",
@@ -96,7 +96,7 @@ export class Login extends React.Component {
                 else if (response.id) {
                     this.props.modifyLoginFlag();
                     localStorage.setItem("data",JSON.stringify(response));
-                    console.log(localStorage);
+                    //console.log(localStorage);
                     this.props.history.push({
                         pathname: '/Dashboard',
                         state: { userData: response}
